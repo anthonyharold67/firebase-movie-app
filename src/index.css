@@ -86,6 +86,8 @@ body {
 
 .navbar {
   padding: 1rem 3rem;
+  width: 100%;
+  position: fixed;
   background-color: #0d47a1 !important;
 }
 
