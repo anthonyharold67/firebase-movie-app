@@ -8,9 +8,9 @@ Project aims to create a Movie App.
 ## Project Skeleton
 
 ```
-008 - Movie App (folder)
+Firebase Movie App (folder)
 |
-|----readme.md         # Given to the students (Definition of the project)
+|----readme.md         
 SOLUTION
 ├── public
 │     └── index.html
