@@ -4,6 +4,7 @@ import Login from "../pages/Login"
 import Register from "../pages/Register"
 import React from 'react'
 import Navbar from "../components/Navbar"
+import Footer from "../components/Footer"
 import MovieDetail from "../pages/MovieDetail"
 import { AuthContext } from "../context/AuthContext"
 import { useContext } from "react"
@@ -36,6 +37,7 @@ const AppRouter = () => {
             </Route>
 
         </Routes>
+        <Footer/>
     </Router>
   )
 }
