@@ -2,7 +2,7 @@ import React, { useEffect,useState,useContext } from "react";
 import axios from "axios";
 import MovieCard from "../components/MovieCard";
 import { AuthContext } from "../context/AuthContext";
-
+import { useNavigate } from "react-router-dom";
 
 const API_KEY = process.env.REACT_APP_TMDB_KEY;
 const FEATURED_API = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}`;
@@ -11,6 +11,7 @@ const SEARCH_API = `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}
 
 
 const Main = () => {
+  const navigate = useNavigate();
   const {currentUser} = useContext(AuthContext);
   const [movies,setMovies] = useState([]);
   const [searchTerm,setSearchTerm] = useState("");  
@@ -30,6 +31,8 @@ const Main = () => {
       getMovies(SEARCH_API + searchTerm);
     }else if(!currentUser){
       alert("Please Login to Search");
+      navigate("/login");
+
     }else{
       alert("Please Enter Search Term");
     }
