@@ -1,5 +1,6 @@
 import React from "react";
 import AuthContextProvider from "./context/AuthContext";
+import { ToastContainer } from "react-toastify";
 import AppRouter from "./router/AppRouter";
 
 const App = () => {
@@ -7,6 +8,7 @@ const App = () => {
     <div>
       <AuthContextProvider>
         <AppRouter />
+        <ToastContainer />
       </AuthContextProvider>
       
     </div>

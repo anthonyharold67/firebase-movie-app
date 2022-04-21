@@ -2,28 +2,36 @@ import React from "react";
 import { useEffect,useState } from "react";
 import { useParams,Link } from "react-router-dom";
 import axios from "axios";
+import VideoSection from "../components/VideoSection";
 
-const API_KEY = process.env.REACT_APP_TMDB_KEY;
 
-
-const baseImageUrl = "https://image.tmdb.org/t/p/w1280";
-const defaultImage =
-    "https://images.unsplash.com/photo-1581905764498-f1b60bae941a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=80";
 
 const MovieDetail = () => {
   const {id} = useParams();
   const [movieDetails, setMovieDetails] = useState({});
+  const [videoKey, setVideoKey] = useState();
+
+  const API_KEY = process.env.REACT_APP_TMDB_KEY;
+    const baseImageUrl = "https://image.tmdb.org/t/p/w1280";
+    const defaultImage =
+        "https://images.unsplash.com/photo-1581905764498-f1b60bae941a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=80";
   const movieDetailBaseUrl = `https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}`;
   const videoUrl = `https://api.themoviedb.org/3/movie/${id}/videos?api_key=${API_KEY}`;
 
   useEffect(() => {
     axios.get(movieDetailBaseUrl).then((response) => 
       setMovieDetails(response.data)
-    ).catch((error) => console.log(error))
-  },[movieDetailBaseUrl])
+    ).catch((error) => console.log(error));
+    axios
+      .get(videoUrl)
+      .then((res) => setVideoKey(res.data.results[0].key))
+      .catch((err) => console.log(err));
+
+  },[movieDetailBaseUrl,videoUrl]);
   return( 
     <div className="container py-5">
       <h1 className="text-center">{movieDetails?.title}</h1>
+      {videoKey && <VideoSection videoKey={videoKey} />}
       <div className="card mb-3">
         <div className="row g-0">
           <div className="col-md-4">
